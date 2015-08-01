@@ -1,0 +1,80 @@
+<head>
+  <title>My Tutor Jungle | Newsletter</title>
+</head>
+
+<body>
+  <div class='header'>
+  	<!-- <h1>My Tutor Jungle</h1> -->
+  	<img id="mtj-logo" src="./MTJ-Final-Final-logo.png">
+  </div>
+  <div class='content'>
+    {{> main }}
+  </div>
+  <div class='footer'>
+    {{> footer }}
+  </div>
+
+</body>
+
+<template name = "main">
+ {{#if showAdmin}}
+    {{> admin}}
+ {{else}}
+    {{> signup}}
+ {{/if}}
+</template>
+
+<template name = "footer">
+  <a href = "http://www.mytutorjungle.com">My Tutor Jungle</a>
+  {{#if isAdmin}}
+  | <a href = "#" class = "admin">toggle admin</a>
+  {{/if}}
+  | {{> loginButtons}}
+</template>
+
+<template name = "signup">
+  {{#if emailSubmitted }}
+    <h1>Thanks for signing up!</h1>
+    <p>We'll let you know when we have updates.</p>
+  {{else }}
+  <h1>Sign up for free!</h1>
+    <p>We'd love to stay in touch with you &mdash; leave us your email and we'll keep you
+    up to date.</p>
+    <form>
+      {{#if showBadEmail}}
+        {{> badEmail}}
+      {{/if}}
+      <input id="email"><button>Submit</button>
+  	</form>
+  {{/if}}
+	<br>
+  <div class="social-media">
+  	<a href="http://www.facebook.com/mytutorjungle"><i class="fa fa-facebook-square"></i></a>
+  	<a href="http://www.plus.google.com/mytutorjungle"><i class="fa fa-google-plus-square"></i></a>
+  	<a href="http://www.pinterest.com/mytutorjungle"><i class="fa fa-pinterest-square"></i></a>
+  </div>
+</template>
+
+
+<template name = "admin">
+  <div class="customers">
+  	<h1>Signed up Customers</h1>
+	  <table>
+	    <tr><th>Customer Email</th><th>Referrer</th><th>Time</th><th>Remove Customer</th></tr>
+	    {{#each emails}}
+	      <tr><td>{{ this.email }}</td>
+	      	<td>{{ this.referrer }}</td>
+	      	<td>{{ this.timestamp }}</td>
+	      	<td><button id="remove">Remove</button></td>
+	      </tr>
+	    {{/each }}
+	  </table>
+	</div>
+</template>
+
+
+<template name="badEmail">
+  <div class="error">
+    <p>That's not a real email address...</p>
+  </div>
+</template>
